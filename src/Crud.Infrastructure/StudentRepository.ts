@@ -19,7 +19,6 @@ export class StudentRepository implements IStudentRepository {
   } 
   
   async getall() {    
-
   const entityManager = getRepository(StudentEntity)
     .createQueryBuilder('students')    
     .leftJoinAndSelect('students.client','client')
