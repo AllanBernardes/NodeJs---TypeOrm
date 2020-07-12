@@ -27,4 +27,17 @@ export class StudentRepository implements IStudentRepository {
     .getMany();
     return await entityManager;
   }
+
+
+  async login(studentEntity: StudentEntity) {    
+    const entityManager = await getRepository(StudentEntity)
+    .createQueryBuilder('students')      
+      // .select('students.student_name, students.type_id')      
+      .where("students.email = :email AND students.password = :password",
+            { email: studentEntity.email, password: studentEntity.password })            
+      .getOne();
+      return entityManager;
+    }
+
+  
 }

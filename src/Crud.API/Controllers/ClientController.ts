@@ -28,6 +28,8 @@ export class ClientController {
     private list() {
         return this.ser.getall();
     }
+
+    
         
 }
 

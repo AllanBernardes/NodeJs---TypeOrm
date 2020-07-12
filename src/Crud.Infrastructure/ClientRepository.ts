@@ -12,7 +12,7 @@ export class ClientRepository implements IClientRepository {
     return await entityManager.save(ClientEntity, entity);       
   }
 
-    async getbyid(clientDto: ClientEntity) {    
+  async getbyid(clientDto: ClientEntity) {    
     const entityManager = getManager();    
     return await entityManager.findOne(ClientEntity, clientDto.corporate_id);              
   } 
@@ -21,5 +21,7 @@ export class ClientRepository implements IClientRepository {
     const entityManager = getManager();     
     return await entityManager.find(ClientEntity);         
   } 
+
+  
 
 }

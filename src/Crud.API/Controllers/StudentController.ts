@@ -29,7 +29,13 @@ export class StudentController {
     private list() {
         return this.ser.getall();
     }
-        
+
+    @httpGet("/login")
+    private login(@request() req: express.Request, @response() res: express.Response) {
+        return this.ser.login(req.body);
+    }  
+
+   
 }
 
 

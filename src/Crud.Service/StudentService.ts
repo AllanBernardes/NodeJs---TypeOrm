@@ -28,4 +28,11 @@ export class StudentService implements IStudentService{
     return await this.rep.getall();    
   } 
 
+  public async login(studentDto: StudentDto) {        
+    const login = plainToClass(StudentEntity, studentDto);  
+    return await this.rep.login(login);    
+  }
+
+  
+
 }

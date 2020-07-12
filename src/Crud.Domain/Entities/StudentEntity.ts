@@ -29,6 +29,13 @@ export class StudentEntity extends EntityBase {
 
   @Column("varchar", { length: 20 })
   phone!: string;
+
+  @Column("varchar", { length: 20 })
+  password!: string;
+
+  //Permissão
+  @Column("int")
+  type_id!: number;
   
   @ManyToOne(() => ClientEntity, client => client.students)
   @JoinColumn({ name: "corporate_id"})
