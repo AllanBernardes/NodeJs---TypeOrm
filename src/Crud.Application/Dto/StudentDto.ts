@@ -41,8 +41,8 @@ export class StudentDto implements IStudentDto{
     this.email = email,    
     this.cell_phone = cell_phone,
     this.phone = phone
-    
-    
   }  
+
+  
 }
 

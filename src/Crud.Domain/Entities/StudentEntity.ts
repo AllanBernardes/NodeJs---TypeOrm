@@ -1,7 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, BeforeInsert } from "typeorm";
 import "reflect-metadata";
 import { ClientEntity } from "./ClientEntity";
 import { EntityBase } from "./EntityBase/EntityBase";
+import * as bcrypt from "bcryptjs";
+import { StudentDto } from "../../Crud.Application/Dto/StudentDto";
 
 @Entity()
 export class StudentEntity extends EntityBase {
@@ -29,8 +31,8 @@ export class StudentEntity extends EntityBase {
 
   @Column("varchar", { length: 20 })
   phone!: string;
-
-  @Column("varchar", { length: 20 })
+  
+  @Column("bytea", {nullable: false})
   password!: string;
 
   //Permissão
@@ -41,6 +43,9 @@ export class StudentEntity extends EntityBase {
   @JoinColumn({ name: "corporate_id"})
   client!: ClientEntity;
 
-  
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 
 }

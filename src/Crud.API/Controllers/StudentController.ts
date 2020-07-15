@@ -32,7 +32,7 @@ export class StudentController {
 
     @httpGet("/login")
     private login(@request() req: express.Request, @response() res: express.Response) {
-        return this.ser.login(req.body);
+        return this.ser.validatelogin(req.body);
     }  
 
    

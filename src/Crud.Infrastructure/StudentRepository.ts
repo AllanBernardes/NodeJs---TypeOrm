@@ -2,7 +2,8 @@ import {EntityRepository, Repository, getRepository, getManager, getConnection} 
 import { injectable } from "inversify";
 import { StudentEntity } from "../Crud.Domain/Entities/StudentEntity";
 import IStudentRepository from "../Crud.Domain/IRepository/IStudentRepository";
-import { ClientEntity } from "../Crud.Domain/Entities/ClientEntity";
+
+
 
 @injectable()
 export class StudentRepository implements IStudentRepository {
@@ -30,14 +31,27 @@ export class StudentRepository implements IStudentRepository {
 
 
   async login(studentEntity: StudentEntity) {    
+
     const entityManager = await getRepository(StudentEntity)
-    .createQueryBuilder('students')      
-      // .select('students.student_name, students.type_id')      
+    .createQueryBuilder('students')          
       .where("students.email = :email AND students.password = :password",
             { email: studentEntity.email, password: studentEntity.password })            
       .getOne();
       return entityManager;
     }
+
+
+  async findByEmail(email: string) {   
+
+    const entityManager = await getRepository(StudentEntity)
+    .createQueryBuilder('students')                 
+      .where("students.email = :email",
+            { email: email})            
+      .getOne();
+      return entityManager;
+    }
+    
+
 
   
 }
